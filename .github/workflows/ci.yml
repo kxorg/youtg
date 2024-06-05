@@ -10,18 +10,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
 
-    - name: SSH into VPS
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.VPS_HOST }}
-        username: ${{ secrets.VPS_USERNAME }}
-        key: ${{ secrets.VPS_PASSWORD }}
-        script: |
-          mkdir /opt/youtg/ && cd /opt/youtg/
-          docker build -t your_image_name .
-          docker stop your_container_name || true
-          docker rm your_container_name || true
-          docker run -d --name your_container_name -p 80:80 your_image_name:latest
+      - name: SSH into VPS
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USERNAME }}
+          password: ${{ secrets.VPS_PASSWORD }}
+          script: |
+            mkdir /opt/youtg/ && cd /opt/youtg/
+            docker build -t your_image_name .
+            docker stop your_container_name || true
+            docker rm your_container_name || true
+            docker run -d --name your_container_name -p 80:80 your_image_name:latest
