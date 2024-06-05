@@ -20,8 +20,6 @@ jobs:
           username: ${{ secrets.VPS_USERNAME }}
           password: ${{ secrets.VPS_PASSWORD }}
           script: |
-            mkdir /opt/youtg/ && cd /opt/youtg/
-            docker build -t your_image_name .
-            docker stop your_container_name || true
-            docker rm your_container_name || true
-            docker run -d --name your_container_name -p 80:80 your_image_name:latest
+            cd /opt/ && git clone git@github.com:kxorg/youtg.git
+            cp .env youtg/bot/.env
+            docker compose down || true
