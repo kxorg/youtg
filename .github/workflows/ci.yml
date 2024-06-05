@@ -25,3 +25,4 @@ jobs:
             cp /opt/.env /opt/youtg/bot/.env
             docker-compose down || true
             docker-compose up -d
+            echo 1337
