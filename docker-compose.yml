@@ -16,8 +16,8 @@ services:
 
   worker:
     build: ./worker
-    ports:
-      - "8000:80"
+    volumes:
+      - ./worker:/app
     restart: always
     networks:
       - youtg-network

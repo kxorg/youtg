@@ -24,4 +24,6 @@ jobs:
             git pull origin main
             cp /opt/.env /opt/youtg/bot/.env
             docker compose down || true
+            docker rmi youtg-telegram-bot:latest -f
+            docker rmi youtg-worker:latest -f
             docker compose up -d
