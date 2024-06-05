@@ -1,0 +1,23 @@
+version: '3.9'
+
+networks:
+  youtg-network:
+    driver: bridge
+
+
+services:
+  telegram-bot:
+    build: ./bot
+    env_file:
+      - ./bot/.env
+    restart: always
+    networks:
+      - youtg-network
+
+  worker:
+    build: ./worker
+    ports:
+      - "8000:80"
+    restart: always
+    networks:
+      - youtg-network
