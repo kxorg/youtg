@@ -20,6 +20,8 @@ jobs:
           username: ${{ secrets.VPS_USERNAME }}
           password: ${{ secrets.VPS_PASSWORD }}
           script: |
-            cd /opt/ && git clone git@github.com:kxorg/youtg.git
-            cp .env youtg/bot/.env
-            docker compose down || true
+            cd /opt/youtg || exit 1
+            git pull origin main
+            cp /opt/.env /opt/youtg/bot/.env
+            docker-compose down || true
+            docker-compose up -d
